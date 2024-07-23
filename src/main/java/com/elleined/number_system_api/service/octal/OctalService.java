@@ -1,7 +1,6 @@
 package com.elleined.number_system_api.service.octal;
 
+import com.elleined.number_system_api.service.Base;
+
 public interface OctalService {
-    <T, R> R toBinary(T t);
-    <T, R> R toDecimal(T t);
-    <T, R> R toHexaDecimal(T t);
 }

@@ -9,5 +9,4 @@ public class NumberSystemApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NumberSystemApiApplication.class, args);
 	}
-
 }
