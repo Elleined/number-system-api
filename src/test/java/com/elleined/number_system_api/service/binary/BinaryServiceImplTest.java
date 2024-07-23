@@ -33,6 +33,7 @@ class BinaryServiceImplTest {
         // Behavior Verifications
 
         // Assertions
+        assertEquals("162", octal);
     }
 
     @Test
@@ -54,5 +55,29 @@ class BinaryServiceImplTest {
         // Behavior Verifications
 
         // Assertions
+        assertEquals("114", decimal);
+    }
+
+    @Test
+    void toHexaDecimal() {
+        // Pre defined values
+        BinaryService binaryService = new BinaryServiceImpl();
+
+        // Expected Value
+
+        // Mock data
+
+        // Set up method
+
+        // Stubbing methods
+
+        // Calling the method
+        String hexaDecimal = binaryService.toHexaDecimal(" 1 110 010  ");
+        System.out.println("Hexadecimal value: " + hexaDecimal);
+
+        // Behavior Verifications
+
+        // Assertions
+        assertEquals("72", hexaDecimal);
     }
 }

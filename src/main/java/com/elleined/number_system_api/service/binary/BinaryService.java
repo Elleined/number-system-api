@@ -52,15 +52,11 @@ public interface BinaryService {
      */
     String toDecimal(String binary);
 
-    static String sanitizeBinary(String binary) {
-        return binary.trim().strip().replaceAll(" ", "");
-    }
-
-    static List<Integer> toIntArray(String binary) {
-        List<Integer> l = new ArrayList<>();
-        for (Character c : binary.toCharArray()) {
-            l.add(Integer.parseInt(c.toString()));
-        }
-        return l;
-    }
+    /**
+     * 1. Group into 4's
+     * 2. Convert each group into decimal first
+     * @param binary
+     * @return
+     */
+    String toHexaDecimal(String binary);
 }
