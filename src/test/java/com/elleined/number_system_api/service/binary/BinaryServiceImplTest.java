@@ -27,7 +27,8 @@ class BinaryServiceImplTest {
         // Stubbing methods
 
         // Calling the method
-        binaryService.toOctal(" 1 110 010  ");
+        String octal = binaryService.toOctal(" 1 110 010  ");
+        System.out.println("Octal value: " + octal);
 
         // Behavior Verifications
 

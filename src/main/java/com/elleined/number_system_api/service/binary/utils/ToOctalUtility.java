@@ -1,17 +1,27 @@
 package com.elleined.number_system_api.service.binary.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface ToOctalUtility {
 
-    // Step 1 method
-    static String sanitizedBinary(String binary) {
-        return binary.trim().strip().replaceAll(" ", "");
+    static StringBuilder addZeros(String binary) {
+        final int grouper = 3;
+        final String sanitizedBinary = binary.trim().strip().replaceAll(" ", "");
+        final int remainder = sanitizedBinary.length() % grouper;
+
+        final StringBuilder sb = new StringBuilder(sanitizedBinary);
+        if (remainder != 0) {
+            final int zerosToBeAdded = grouper - remainder;
+            for (int i = 0; i < zerosToBeAdded; i++)
+                sb.insert(0, "0");
+        }
+        return sb;
     }
 
-    // Step 2 method
-    static String[] groupIntoThrees(StringBuilder input) {
+    static Stream<List<Integer>> groupIntoThrees(StringBuilder input) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < input.length(); i++) {
             result.append(input.charAt(i));
@@ -19,46 +29,42 @@ public interface ToOctalUtility {
                 result.append(' ');
         }
 
-        return result.toString()
-                .split(" ");
+        return Arrays.stream(result.toString()
+                .split(" "))
+                .map(String::toCharArray)
+                .map(chars -> {
+                    List<Integer> l = new ArrayList<>();
+                    for (Character c : chars) {
+                        l.add(Integer.parseInt(c.toString()));
+                    }
+                    return l;
+                });
     }
 
-    // Step 2 method
-    static List<Integer> convert(char[] chars) {
-        List<Integer> list = new ArrayList<>();
-        for (Character c : chars) {
-            list.add(Integer.parseInt(c.toString()));
-        }
-        return list;
-    }
-
-    // Step 2 method
-    static List<Integer> compute(List<Integer> ints) {
-        // index 0 = 4
-        // index 1 = 2
-        // index 2 = 1
-        List<Integer> computedInts = new ArrayList<>();
-        for (int i = 0; i < ints.size(); i++) {
-            if (ints.get(i) == 0)
+    // index 0 = 4
+    // index 1 = 2
+    // index 2 = 1
+    static List<Integer> multiply(List<Integer> integers) {
+        List<Integer> computedIntegers = new ArrayList<>();
+        for (int index = 0; index < integers.size(); index++) {
+            int binary = integers.get(index);
+            if (binary == 0)
                 continue;
 
-            if (i == 0) {
-                int computed = ints.get(i) * 4;
-                computedInts.add(computed);
-            } else if (i == 1) {
-                int computed = ints.get(i) * 2;
-                computedInts.add(computed);
-            } else if (i == 2) {
-                int computed = ints.get(i);
-                computedInts.add(computed);
-            }
+            int computedInteger = switch (index) {
+                case 0 -> binary * 4;
+                case 1 -> binary * 2;
+                case 2 -> binary;
+                default -> throw new IllegalStateException("Unexpected value: " + integers.get(index));
+            };
+            computedIntegers.add(computedInteger);
         }
-
-        return computedInts;
+        return computedIntegers;
     }
 
-    static int add(List<Integer> integers) {
+    static String sum(List<Integer> integers) {
         return integers.stream()
-                .reduce(0, Integer::sum);
+                .reduce(0, Integer::sum)
+                .toString();
     }
 }

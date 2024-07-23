@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -46,34 +44,11 @@ public class BinaryServiceImpl implements BinaryService {
      */
     @Override
     public String toOctal(final String binary) {
-        final int grouper = 3;
-        final String sanitizedBinary = ToOctalUtility.sanitizedBinary(binary);
-        final int sanitizedBinaryLength = sanitizedBinary.length();
-        final int remainder = sanitizedBinaryLength % grouper;
+        StringBuilder sb = ToOctalUtility.addZeros(binary); // Step 1
 
-        System.out.println("Binary before sanitizing: " + binary);
-
-        // Start of Step 1
-        final StringBuilder sb = new StringBuilder(sanitizedBinary);
-        if (remainder != 0) {
-            final int zerosToBeAdded = grouper - remainder;
-            for (int i = 0; i < zerosToBeAdded; i++)
-                sb.insert(0, "0");
-        }
-
-        System.out.println("Binary after adding zeros properly: " + sb);
-        // End of Step 1
-
-        List<Integer> octal = Stream.of(ToOctalUtility.groupIntoThrees(sb))
-                .map(String::toCharArray)
-                .map(ToOctalUtility::convert) // Step 2
-                .map(ToOctalUtility::compute) // Step 3
-                .map(ToOctalUtility::add)
-                .toList(); // Step 3
-
-        octal.forEach(System.out::print);
-        return octal.stream()
-                .map(String::valueOf)
-                .toString();
+        return ToOctalUtility.groupIntoThrees(sb) // Step 1
+                .map(ToOctalUtility::multiply) // Step 2
+                .map(ToOctalUtility::sum) // Step 3
+                .reduce("", String::concat);// Step 4
     }
 }
