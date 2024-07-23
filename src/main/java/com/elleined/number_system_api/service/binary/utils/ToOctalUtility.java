@@ -11,10 +11,9 @@ public interface ToOctalUtility {
 
     static StringBuilder addZeros(String binary) {
         final int grouper = 3;
-        final String sanitizedBinary = BinaryService.sanitizeBinary(binary);
-        final int remainder = sanitizedBinary.length() % grouper;
+        final int remainder = binary.length() % grouper;
 
-        final StringBuilder sb = new StringBuilder(sanitizedBinary);
+        final StringBuilder sb = new StringBuilder(binary);
         if (remainder != 0) {
             final int zerosToBeAdded = grouper - remainder;
             for (int i = 0; i < zerosToBeAdded; i++)
@@ -33,14 +32,7 @@ public interface ToOctalUtility {
 
         return Arrays.stream(result.toString()
                 .split(" "))
-                .map(String::toCharArray)
-                .map(chars -> {
-                    List<Integer> l = new ArrayList<>();
-                    for (Character c : chars) {
-                        l.add(Integer.parseInt(c.toString()));
-                    }
-                    return l;
-                });
+                .map(BinaryService::toIntArray);
     }
 
     // index 0 = 4

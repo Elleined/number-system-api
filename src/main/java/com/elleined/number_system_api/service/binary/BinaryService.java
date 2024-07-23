@@ -1,5 +1,8 @@
 package com.elleined.number_system_api.service.binary;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface BinaryService {
     /**
      * 1. Group the binary number into (3) three's
@@ -51,5 +54,13 @@ public interface BinaryService {
 
     static String sanitizeBinary(String binary) {
         return binary.trim().strip().replaceAll(" ", "");
+    }
+
+    static List<Integer> toIntArray(String binary) {
+        List<Integer> l = new ArrayList<>();
+        for (Character c : binary.toCharArray()) {
+            l.add(Integer.parseInt(c.toString()));
+        }
+        return l;
     }
 }
