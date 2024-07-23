@@ -1,5 +1,7 @@
 package com.elleined.number_system_api.service.binary.utils;
 
+import com.elleined.number_system_api.service.binary.BinaryService;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +11,7 @@ public interface ToOctalUtility {
 
     static StringBuilder addZeros(String binary) {
         final int grouper = 3;
-        final String sanitizedBinary = binary.trim().strip().replaceAll(" ", "");
+        final String sanitizedBinary = BinaryService.sanitizeBinary(binary);
         final int remainder = sanitizedBinary.length() % grouper;
 
         final StringBuilder sb = new StringBuilder(sanitizedBinary);
