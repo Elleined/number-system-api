@@ -1,8 +1,5 @@
 package com.elleined.number_system_api.service.binary;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public interface BinaryService {
     /**
      * 1. Group the binary number into (3) three's

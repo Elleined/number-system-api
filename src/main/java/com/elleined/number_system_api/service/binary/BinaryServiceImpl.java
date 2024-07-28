@@ -1,8 +1,6 @@
 package com.elleined.number_system_api.service.binary;
 
 import com.elleined.number_system_api.service.AppUtility;
-import com.elleined.number_system_api.service.binary.utils.ToHexaDecimalUtility;
-import com.elleined.number_system_api.service.binary.utils.ToOctalUtility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ public class BinaryServiceImpl implements BinaryService {
         final int group = 3;
         final String sanitizedBinary = AppUtility.sanitizeBinary(binary);
 
-        StringBuilder sb = ToOctalUtility.addZeros(sanitizedBinary, group); // Step 1
+        StringBuilder sb = AppUtility.addZeros(sanitizedBinary, group); // Step 1
         return AppUtility.group(sb, group) // Step 1
                 .map(AppUtility::toIntArray) // Set up method
                 .map(AppUtility::multiply) // Step 2
@@ -43,12 +41,12 @@ public class BinaryServiceImpl implements BinaryService {
         final int group = 4;
         final String sanitizedBinary = AppUtility.sanitizeBinary(binary);
 
-        StringBuilder sb = ToOctalUtility.addZeros(sanitizedBinary, group); // Step 1
+        StringBuilder sb = AppUtility.addZeros(sanitizedBinary, group); // Step 1
         return AppUtility.group(sb, group)
                 .map(AppUtility::toIntArray)
                 .map(AppUtility::multiply)
                 .map(AppUtility::sum)
-                .map(ToHexaDecimalUtility::toHex)
+                .map(AppUtility::toHex)
                 .reduce("", String::concat);
     }
 }
