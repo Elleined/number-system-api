@@ -3,10 +3,7 @@ package com.elleined.number_system_api.controller;
 import com.elleined.number_system_api.dto.NumberSystemDTO;
 import com.elleined.number_system_api.service.binary.BinaryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/binary")
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BinaryController {
     private final BinaryService binaryService;
 
-    @PostMapping
+    @GetMapping
     public NumberSystemDTO binary(@RequestParam("binary") String binary) {
         String octal = binaryService.toOctal(binary);
         String decimal = binaryService.toDecimal(binary);

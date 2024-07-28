@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class NumberSystemDTO {
     private String binary;
-    private String decimal;
     private String octal;
+    private String decimal;
     private String hexaDecimal;
 }
