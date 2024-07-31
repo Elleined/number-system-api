@@ -1,6 +1,7 @@
 package com.elleined.number_system_api.service.binary;
 
 import com.elleined.number_system_api.service.AppUtility;
+import com.elleined.number_system_api.service.Base;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class BinaryServiceImpl implements BinaryService {
         StringBuilder sb = AppUtility.addZeros(sanitizedBinary, group); // Step 1
         return AppUtility.group(sb, group) // Step 1
                 .map(AppUtility::toIntArray) // Set up method
-                .map(AppUtility::multiply) // Step 2
+                .map(integers -> AppUtility.multiply(integers, Base.BINARY)) // Step 2
                 .map(AppUtility::sum) // Step 3
                 .reduce("", String::concat); // Step 4
     }
@@ -32,7 +33,7 @@ public class BinaryServiceImpl implements BinaryService {
         final String sanitizedBinary = AppUtility.sanitizeBinary(binary);
 
         List<Integer> binaries = AppUtility.toIntArray(sanitizedBinary);
-        List<Integer> computedBinaries = AppUtility.multiply(binaries);
+        List<Integer> computedBinaries = AppUtility.multiply(binaries, Base.BINARY);
         return AppUtility.sum(computedBinaries);
     }
 
@@ -44,7 +45,7 @@ public class BinaryServiceImpl implements BinaryService {
         StringBuilder sb = AppUtility.addZeros(sanitizedBinary, group); // Step 1
         return AppUtility.group(sb, group)
                 .map(AppUtility::toIntArray)
-                .map(AppUtility::multiply)
+                .map(integers -> AppUtility.multiply(integers, Base.BINARY))
                 .map(AppUtility::sum)
                 .map(AppUtility::toHex)
                 .reduce("", String::concat);

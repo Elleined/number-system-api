@@ -18,11 +18,19 @@ public interface AppUtility {
         return l.reversed();
     }
 
+    static List<Integer> toIntArray(int octal) {
+        List<Integer> l = new ArrayList<>();
+        for (Character c : String.valueOf(octal).toCharArray()) {
+            l.add(Integer.parseInt(c.toString()));
+        }
+        return l;
+    }
+
     // Before using this method make sure that the list your iterating is REVERSED!!! first
-    static int getMultiplier(int index) {
+    static int getMultiplier(int index, Base base) {
         int multiplier = 1;
         while (index != 0) {
-            multiplier *= 2;
+            multiplier *= base.getBase();
             index--;
         }
 
@@ -40,14 +48,14 @@ public interface AppUtility {
         return Arrays.stream(result.toString().split(" "));
     }
 
-    static List<Integer> multiply(List<Integer> binaries) {
+    static List<Integer> multiply(List<Integer> binaries, Base base) {
         List<Integer> products = new ArrayList<>();
         for (int i = 0; i < binaries.size(); i++) {
             int binary = binaries.get(i);
             if (binary == 0)
                 continue;
 
-            int multiplier = AppUtility.getMultiplier(i);
+            int multiplier = AppUtility.getMultiplier(i, base);
             products.add(binary * multiplier);
         }
         return products;
