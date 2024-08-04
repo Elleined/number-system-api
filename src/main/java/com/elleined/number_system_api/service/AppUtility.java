@@ -1,8 +1,6 @@
 package com.elleined.number_system_api.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public interface AppUtility {
@@ -79,11 +77,69 @@ public interface AppUtility {
         return sb;
     }
 
-    static String toHex(String binary) {
-        return Integer.toHexString(Integer.parseInt(binary));
+    static String toHex(String decimal) {
+        Map<String, String> map = new HashMap<>();
+        map.put("0", "0");
+        map.put("1", "1");
+        map.put("2", "2");
+        map.put("3", "3");
+        map.put("4", "4");
+        map.put("5", "5");
+        map.put("6", "6");
+        map.put("7", "7");
+        map.put("8", "8");
+        map.put("9", "9");
+        map.put("10", "A");
+        map.put("11", "B");
+        map.put("12", "C");
+        map.put("13", "D");
+        map.put("14", "E");
+        map.put("15", "F");
+
+        return map.get(decimal);
     }
 
-    static String toHex(int binary) {
-        return Integer.toHexString(binary);
+    static int toHex(Character decimal) {
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('0', 0);
+        map.put('1', 1);
+        map.put('2', 2);
+        map.put('3', 3);
+        map.put('4', 4);
+        map.put('5', 5);
+        map.put('6', 6);
+        map.put('7', 7);
+        map.put('8', 8);
+        map.put('9', 9);
+        map.put( 'A', 10);
+        map.put( 'B', 11);
+        map.put( 'C', 12);
+        map.put( 'D', 13);
+        map.put( 'E', 14);
+        map.put( 'F', 15);
+
+        return map.get(decimal);
+    }
+
+    static String toHex(int decimal) {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(0, "0");
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
+        map.put(4, "4");
+        map.put(5, "5");
+        map.put(6, "6");
+        map.put(7, "7");
+        map.put(8, "8");
+        map.put(9, "9");
+        map.put(10, "A");
+        map.put(11, "B");
+        map.put(12, "C");
+        map.put(13, "D");
+        map.put(14, "E");
+        map.put(15, "F");
+
+        return map.get(decimal);
     }
 }

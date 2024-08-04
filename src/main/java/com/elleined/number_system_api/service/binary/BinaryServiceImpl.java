@@ -34,6 +34,7 @@ public class BinaryServiceImpl implements BinaryService {
 
         List<Integer> binaries = AppUtility.toIntArray(sanitizedBinary);
         List<Integer> computedBinaries = AppUtility.multiply(binaries, Base.BINARY);
+        computedBinaries.forEach(System.out::println);
         return AppUtility.sum(computedBinaries);
     }
 
