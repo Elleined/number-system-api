@@ -4,6 +4,8 @@ services:
     container_name: number_system_api
     env_file:
       - .env
+    ports:
+      - "8072:8072"
     networks:
       - number_system_api_network
 networks:
