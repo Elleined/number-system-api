@@ -1,16 +1,11 @@
 services:
-  number_system_app:
-    build: .
-    image: elleined/number-system-api
-    container_name: number_system_app
-    restart: always
-    ports:
-      - '8072:8072'
-    environment:
-      - PORT=8072
+  number_system_api:
+    image: elleined/number-system-api:latest
+    container_name: number_system_api
+    env_file:
+      - .env
     networks:
       - number_system_api_network
-
 networks:
  number_system_api_network:
     name: number_system_api_network

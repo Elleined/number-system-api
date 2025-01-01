@@ -1,8 +1,10 @@
+FROM jelastic/maven:3.9.5-openjdk-21 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean install -DskipTests
+
 FROM alpine/java:21-jdk
-MAINTAINER Elleined
-
-ENV PORT=8072
-
-ADD ./target/*.jar number-system-api.jar
-EXPOSE 8072
+WORKDIR /app
+COPY --from=build /app/target/*.jar .
 CMD ["java", "-jar", "number-system-api.jar"]
